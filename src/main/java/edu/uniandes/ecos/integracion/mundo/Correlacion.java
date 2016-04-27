@@ -34,6 +34,8 @@ public class Correlacion {
     //@METODO
     public double calcularRango(LinkedList n, double x) {
         double rango = 0;
+        IntegradorX integradorX = new IntegradorX();
+        integradorX.buscarX(0.35, n.size()-2, x);
         
         return rango;
     }
