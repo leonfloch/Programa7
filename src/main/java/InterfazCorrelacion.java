@@ -65,6 +65,7 @@ public class InterfazCorrelacion {
         int cont = 1;
         while (iterador.hasNext()) {
             Resultado res = (Resultado) iterador.next();
+            
             html.append("<tr>");
             html.append("<td rowspan=\"9\">Test " +  cont  +"</td>");
             html.append("<td>r x,y</td>");

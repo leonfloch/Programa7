@@ -13,21 +13,25 @@ public class Regresion {
      * datos con la info de: Estimated Proxy Size
      */
     private static final String EST_PROXY_SIZE = "data/EstimatedProxySize.txt";
+    private static final String EST_PROXY_SIZE_PROG = "data/MisProg-EstimatedProxySize.txt";
     
     /**
      * datos con la info de: Plan Added and Modified size
      */
     private static final String PLAN_ADD_MODIF_SIZE = "data/PlanAddedandModifiedsize.txt";
+    private static final String PLAN_ADD_MODIF_SIZE_PROG = "data/MisProg-PlanAddedandModifiedsize.txt";
     
     /**
      * datos con la info de: Actual Added and Modified Size
      */    
     private static final String ACTUAL_ADD_MOD_SIZE = "data/ActualAddedandModifiedSize.txt";    
+    private static final String ACTUAL_ADD_MOD_SIZE_PROG = "data/MisProg-ActualAddedandModifiedSize.txt";    
     
     /**
      * datos con la info de: Actual Development Hours
      */
     private static final String ACTUAL_DEVEP_HOURS = "data/ActualDevelopmentHours.txt";
+    private static final String ACTUAL_DEVEP_HOURS_PROG = "data/MisProg-ActualDevelopmentHours.txt";
     
     /**
      * indica el tamano del programa 11
@@ -48,20 +52,36 @@ public class Regresion {
         //test1
         LinkedList datosX = Archivo.obtenerDatos(EST_PROXY_SIZE);
         LinkedList datosY = Archivo.obtenerDatos(ACTUAL_ADD_MOD_SIZE);
-        tablaCalculada.add(this.calcularRegresion(datosX, datosY));
+        Resultado resultado = this.calcularRegresion(datosX, datosY);
+        resultado.setParametroCeroAct(-22.55253275);
+        resultado.setParametroUnoAct(1.727932426);
+        resultado.setCoeficienteR2Act(0.91106371);
+        resultado.setCoeficienteRxyAct(0.954496574);
+        tablaCalculada.add(resultado);
+        
+        
         
         //test2        
         datosY = Archivo.obtenerDatos(ACTUAL_DEVEP_HOURS);
-        tablaCalculada.add(this.calcularRegresion(datosX, datosY));
+        resultado = this.calcularRegresion(datosX, datosY);
+        resultado.setParametroCeroAct(-4.038881575);
+        resultado.setParametroUnoAct(0.16812665);
+        resultado.setCoeficienteR2Act(0.871061766);
+        resultado.setCoeficienteRxyAct(0.933306898);
+        tablaCalculada.add(resultado);
+        
         
         //test3
-        datosX = Archivo.obtenerDatos(PLAN_ADD_MODIF_SIZE);
-        datosY = Archivo.obtenerDatos(ACTUAL_ADD_MOD_SIZE);
-        tablaCalculada.add(this.calcularRegresion(datosX, datosY));
+        datosX = Archivo.obtenerDatos(PLAN_ADD_MODIF_SIZE_PROG);
+        datosY = Archivo.obtenerDatos(ACTUAL_ADD_MOD_SIZE_PROG);
+        resultado = this.calcularRegresion(datosX, datosY);        
+        tablaCalculada.add(resultado);
+        
         
         //test4
-        datosY = Archivo.obtenerDatos(ACTUAL_DEVEP_HOURS);
-        tablaCalculada.add(this.calcularRegresion(datosX, datosY));
+        datosY = Archivo.obtenerDatos(ACTUAL_DEVEP_HOURS_PROG);
+        resultado = this.calcularRegresion(datosX, datosY);
+        tablaCalculada.add(resultado);
         
         return tablaCalculada;
     }
@@ -104,6 +124,9 @@ public class Regresion {
         double yk = param0 + (param1 * ESTIMACION);
                         
         Resultado resultado = new Resultado(param0, param1, rXy, rCuadrado, yk);        
+        
+        
+        
         return resultado;
     }
     
